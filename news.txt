@@ -1,0 +1,4 @@
+Client ID
+809048099530-ak5t4qrrff67jk1k425lg3hj53vkcqi4.apps.googleusercontent.com
+Client Secret
+PzXYSBdSXka9EhumOd-XQYUz
