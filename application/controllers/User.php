@@ -37,7 +37,7 @@ class User extends BaseController
 
         $client->setAccessType('offline');
         // var_dump(__DIR__ . '\..\../credentials.json');
-        $client->setAuthConfig('/var/www/html/credentials.json');
+        $client->setAuthConfig(__DIR__ . '\..\../credentials.json');
 
         
 
