@@ -193,7 +193,7 @@
 
   $('#iframetable').DataTable({
     "processing": true,
-    "ajax": "http://localhost:3030/api/v1/scrapping",
+    "ajax": "http://54.193.250.208:3030/api/v1/scrapping",
     "columns": [{
         "data": "Samsung_DCO_2020_data.0.UniqueID"
       },
