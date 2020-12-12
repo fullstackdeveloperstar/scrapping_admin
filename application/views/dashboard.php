@@ -69,6 +69,7 @@
           <thead>
             <tr>
               <th>Filtered by</th>
+              <th>Iframe</th>
               <th>Image1</th>
               <th>Image2</th>
               <th>LifestyleCTA</th>
@@ -78,19 +79,11 @@
 
             </tr>
           </thead>
-          <tfoot>
-            <tr>
-
-              <th>Filtered by</th>
-              <th>Image1</th>
-              <th>Image2</th>
-              <th>LifestyleCTA</th>
-              <th>Segmentname</th>
-              <th>LifestyleCopyMain</th>
-              <th>Logo2</th>
-            </tr>
-          </tfoot>
         </table>
+
+      </div>
+
+      <div class="col-lg-12" id="iframes">
 
       </div>
       <div class="col-lg-12" style="margin-top: 50px;">
@@ -184,50 +177,90 @@
 <link href="https://cdn.datatables.net/1.10.22/css/jquery.dataTables.min.css" rel="stylesheet" type="text/css" />
 <script>
   $.ajax({
-    url: 'http://localhost:3030/api/v1/scrapping',
+    url: 'http://54.193.250.208:3030/api/v1/scrapping',
     type: 'GET',
     success: function(res) {
+      html = ``;
       console.log(res);
+
+      for(i = 0; i<res.data.length; i++) {
+        html += `<iframe width="300" height="250" id="iframe_`+ res.data[i].Samsung_DCO_2020_data[0].UniqueID +`" src="http://localhost/test"></iframe>`
+      }
+
+
+      $('#iframes').html(html);
+
+      setTimeout(function(){ 
+
+        for(i = 0; i<res.data.length; i++) {
+
+          iframe = document.getElementById("iframe_" + res.data[i].Samsung_DCO_2020_data[0].UniqueID);
+
+          iWindow = iframe.contentWindow;
+
+          iWindow.postMessage(res.data[i].Samsung_DCO_2020_data[0]);
+        }
+
+       }, 10000);
+      
     }
   });
 
-  $('#iframetable').DataTable({
-    "processing": true,
-    "ajax": "http://54.193.250.208:3030/api/v1/scrapping",
-    "columns": [{
-        "data": "Samsung_DCO_2020_data.0.UniqueID"
-      },
-      {
-        "data": "Samsung_DCO_2020_data.0.LifestyleBackground.Url",
-        render: function(cellData) {
-          return '<img src="' + cellData + '" style="width: 100px;">'
-        }
-      },
-      {
-        "data": "Samsung_DCO_2020_data.0.ProductBackground.Url",
-        render: function(cellData) {
-          return '<img src="' + cellData + '" style="width: 100px;">'
-        }
-      },
-      {
-        "data": "Samsung_DCO_2020_data.0.LifestyleCTA"
-      },
+  // $('#iframetable').DataTable({
+  //   "processing": true,
+  //   "ajax": "http://54.193.250.208:3030/api/v1/scrapping",
+  //   "columns": [{
+  //       "data": "Samsung_DCO_2020_data.0.UniqueID"
+  //     },
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.UniqueID",
+  //       render: function(data, type, row, meta) {
+  //         // console.log(row)
+  //         return `<iframe id="iframe_`+row.Samsung_DCO_2020_data[0].UniqueID+`" src="http://localhost/test"></iframe>`
+  //       }
+  //     }, 
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.LifestyleBackground.Url",
+  //       render: function(cellData) {
+  //         return '<img src="' + cellData + '" style="width: 100px;">'
+  //       }
+  //     },
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.ProductBackground.Url",
+  //       render: function(cellData) {
+  //         return '<img src="' + cellData + '" style="width: 100px;">'
+  //       }
+  //     },
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.LifestyleCTA"
+  //     },
 
-      {
-        "data": "Samsung_DCO_2020_data.0.Segmentname"
-      },
-      {
-        "data": "Samsung_DCO_2020_data.0.LifestyleCopyMain"
-      },
-      {
-        "data": "Samsung_DCO_2020_data.0.Logo2.Url",
-        render: function(cellData) {
-          return '<img src="' + cellData + '" style="width: 50px;">'
-        }
-      },
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.Segmentname"
+  //     },
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.LifestyleCopyMain"
+  //     },
+  //     {
+  //       "data": "Samsung_DCO_2020_data.0.Logo2.Url",
+  //       render: function(cellData) {
+  //         return '<img src="' + cellData + '" style="width: 50px;">'
+  //       }
+  //     },
+  //   ],
 
-    ]
-  });
+  //   "createdRow": function ( row, data, index ) {
+      
+      
+  //     // iframe = document.getElementById("iframe_" + data.Samsung_DCO_2020_data[0].UniqueID);
+
+      
+
+  //     // iWindow = iframe.contentWindow;
+
+  //     // iWindow.postMessage(data);
+  //   }
+  // });
 
   $("#sheettable").DataTable({"scrollX": true});
 </script>

@@ -252,6 +252,10 @@ class Login extends CI_Controller
             redirect("/login");
         }
     }
+
+    function test() {
+        $this->load->view('test');
+    }
 }
 
 ?>
