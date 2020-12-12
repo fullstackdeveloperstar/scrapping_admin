@@ -63,7 +63,7 @@
       </div><!-- ./col -->
     </div>
 
-    <div class="row">
+    <!-- <div class="row">
       <div class="col-lg-12">
         <table id="iframetable" class="display" style="width:100%">
           <thead>
@@ -81,7 +81,7 @@
           </thead>
         </table>
 
-      </div>
+      </div> -->
 
       <div class="col-lg-12" id="iframes">
 
@@ -184,7 +184,7 @@
       console.log(res);
 
       for(i = 0; i<res.data.length; i++) {
-        html += `<iframe width="300" height="250" id="iframe_`+ res.data[i].Samsung_DCO_2020_data[0].UniqueID +`" src="http://localhost/test"></iframe>`
+        html += `<iframe width="300" height="250" scrolling="no" id="iframe_`+ res.data[i].Samsung_DCO_2020_data[0].UniqueID +`" src="/test"></iframe>`
       }
 
 
